@@ -1,0 +1,31 @@
+.row {
+  margin-top: 10px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.reg-form {
+  padding: 20px;
+}
+
+.reg-title {
+  font-size: 20px;
+  color: rgb(125, 2, 125);
+  margin: 5px 0;
+}

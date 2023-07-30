@@ -1,0 +1,70 @@
+<div class="conatiner">
+  <h1 mat-dialog-title>{{ update_data ? "Update-task" : "Add New Task" }}</h1>
+  <mat-dialog-content>
+    <form
+      class="reg-form"
+      [formGroup]="taskForm"
+      (ngSubmit)="handleFormSubmit()"
+    >
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter Title</mat-label>
+          <input
+            matInput
+            placeholder="enter task title"
+            formControlName="title"
+          />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Due-Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="due_date" />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+          <mat-hint>Description length must be atleast 10 characters</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="" [color]="'accent'" appearance="outline">
+          <mat-label>Priority</mat-label>
+          <mat-select formControlName="priority">
+            <mat-option value="low">Low</mat-option>
+            <mat-option value="medium">Medium</mat-option>
+            <mat-option value="high">High</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="" [color]="'accent'" appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="to-do">To-Do</mat-option>
+            <mat-option value="in-progress">In-Progress</mat-option>
+            <mat-option value="completed">Completed</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row"></div>
+      <div class="row">
+        <button class="w-full" type="submit" mat-raised-button color="primary">
+          {{ update_data ? "Update" : "Add" }}
+        </button>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button class="" mat-raised-button color="warn" mat-dialog-close>
+      close <mat-icon>close</mat-icon>
+    </button>
+  </mat-dialog-actions>
+</div>
+
+<!-- table content  -->

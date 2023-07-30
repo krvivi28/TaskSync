@@ -1,0 +1,32 @@
+<mat-dialog-content class="mat-typography">
+  <ng-container *ngIf="history.length > 0; else elseBlock">
+    <h1>Track History</h1>
+    <div class="history">
+      <mat-card class="h-card" *ngFor="let item of history; let ind = index">
+        <mat-card-header>
+          <mat-card-subtitle>S.No:{{ ind }}</mat-card-subtitle>
+          <mat-card-subtitle>Title:{{ item.title }}</mat-card-subtitle>
+          <mat-card-content
+            >Last Updated:
+            {{ item.last_edit | date : "mediumDate" }}</mat-card-content
+          >
+          <mat-card-content
+            >Due-date:
+            {{ item.due_date | date : "mediumDate" }}</mat-card-content
+          >
+          <mat-card-content>Priority: {{ item.priority }}</mat-card-content>
+          <mat-card-content>Status: {{ item.status }}</mat-card-content>
+        </mat-card-header>
+        <mat-card-content>
+          Description:{{ item.description }}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-container>
+  <ng-template #elseBlock>
+    <p>No History Found</p>
+  </ng-template>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

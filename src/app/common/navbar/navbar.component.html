@@ -1,0 +1,42 @@
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <!-- <span>Task-Sync</span> -->
+  <span>
+    <a
+      style="text-decoration: none; color: white; margin-left: 5px"
+      routerLink="/tasks"
+      >Task-Sync</a
+    ></span
+  >
+  <span style="margin-left: 10px">
+    <a
+      style="text-decoration: none; color: white; margin-left: 5px"
+      routerLink="/tasks"
+      >Tasks</a
+    ></span
+  >
+
+  <span class="example-spacer"></span>
+  <!-- <ng-container *ngIf="[isAuthUser]; else elseBlock">
+    <button mat-flat-button color="accent">
+      welcome back {{ isAuthUser.name }}
+    </button>
+    <button (click)="handleLogout()" mat-flat-button color="warn">
+      Logout
+    </button>
+  </ng-container>
+  <ng-template #elseBlock>
+    <button mat-raised-button color="accent">Login</button>
+  </ng-template> -->
+  <button mat-button [matMenuTriggerFor]="menu">Profile</button>
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="/login">Login</a>
+    <a mat-menu-item routerLink="/register">Register</a>
+  </mat-menu>
+</mat-toolbar>

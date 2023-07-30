@@ -1,0 +1,90 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header class="reg-title">User Registration</mat-card-header>
+    <mat-card-content>
+      <form class="" [formGroup]="registerForm" (ngSubmit)="handleFormSubmit()">
+        <!-- name  -->
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Name</mat-label>
+            <input
+              matInput
+              placeholder="your good name"
+              formControlName="name"
+            />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <!-- <mat-hint>Enter your name</mat-hint> -->
+          </mat-form-field>
+        </div>
+
+        <!-- email  -->
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Email</mat-label>
+            <input
+              matInput
+              placeholder="enter your email"
+              formControlName="email"
+            />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <!-- <mat-hint>Enter your name</mat-hint> -->
+          </mat-form-field>
+        </div>
+        <!-- password  -->
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter your password</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+            />
+            <mat-hint>Pasword length must be 6 characters</mat-hint>
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </mat-form-field>
+          <!-- <mat-form-field class="" [color]="'accent'" appearance="outline">
+            <mat-label>Color</mat-label>
+            <mat-select formArrayName="role" formControlName="role">
+              <mat-option value="primary">Admin</mat-option>
+              <mat-option value="accent">Accent</mat-option>
+              <mat-option value="warn">Warn</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+        </div>
+
+        <!-- gender  -->
+        <div class="row">
+          <label>Select Gender: </label>
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+            <mat-radio-button value="other">other</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <!-- reg buttons  -->
+        <div class="row">
+          <button class="w-full" type="submit" mat-raised-button color="accent">
+            Register
+          </button>
+
+          <a
+            class="w-full"
+            mat-raised-button
+            color="primary"
+            routerLink="/login"
+            >Back to login</a
+          >
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

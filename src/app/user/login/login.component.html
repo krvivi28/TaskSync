@@ -1,0 +1,58 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header class="reg-title">User Login</mat-card-header>
+    <mat-card-content>
+      <form class="" [formGroup]="loginForm" (ngSubmit)="handleLogin()">
+        <!-- email  -->
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Email</mat-label>
+            <input
+              matInput
+              placeholder="enter your email"
+              formControlName="email"
+            />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <!-- <mat-hint>Enter your name</mat-hint> -->
+          </mat-form-field>
+        </div>
+        <!-- password  -->
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter your password</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+            />
+            <mat-hint>Pasword length must be 6 characters</mat-hint>
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <!-- reg buttons  -->
+        <div class="row">
+          <button class="w-full" type="submit" mat-raised-button color="accent">
+            Login
+          </button>
+
+          <a
+            class="w-full"
+            mat-raised-button
+            color="primary"
+            routerLink="/register"
+            >Back to Register</a
+          >
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
