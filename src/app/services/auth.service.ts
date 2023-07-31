@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Iuser } from "../userModel/iuser";
+import { Observable, of } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -22,7 +23,7 @@ export class AuthService {
     this.users.push(user);
     return `user with ${user.id} created successfully `;
   };
-  loginUser = (l_data: any) => {
+  loginUser = (l_data: any): Observable<any> => {
     const { email, password } = l_data;
     let user = this.users.find((user) => {
       return user.email == email && user.password == password;
@@ -32,7 +33,7 @@ export class AuthService {
       this.isValidUser = true;
       localStorage.setItem("authUser", jsonUser);
     }
-    return user;
+    return of(user);
   };
   getAllUsers = () => {
     return this.users;
@@ -55,5 +56,8 @@ export class AuthService {
       this.users.splice(ind, 1);
     }
     return `user with id: ${id} deleted successfully! updated array length ${this.users.length}`;
+  };
+  userValidationStatus = (): Observable<any> => {
+    return of(this.isValidUser);
   };
 }

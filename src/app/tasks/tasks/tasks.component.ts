@@ -9,6 +9,9 @@ import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { HistoryComponent } from "src/app/common/history/history.component";
 import { SnackbarService } from "src/app/services/snackbar.service";
+import { Papa } from "ngx-papaparse";
+// import * as Papa from "papaparse";
+
 @Component({
   selector: "app-tasks",
   templateUrl: "./tasks.component.html",
@@ -25,6 +28,7 @@ export class TasksComponent implements OnInit {
     "action",
   ];
   dataSource!: MatTableDataSource<any>;
+  taskData: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -32,10 +36,18 @@ export class TasksComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public dialog1: MatDialog,
-    private formBuilder: FormBuilder,
     private task_services: TasksService,
-    private snake_alert: SnackbarService
-  ) {}
+    private snake_alert: SnackbarService,
+    private papa: Papa
+  ) {
+    const csvData = '"Hello","World!"';
+
+    this.papa.parse(csvData, {
+      complete: (result) => {
+        console.log("Parsed: ", result);
+      },
+    });
+  }
 
   ngOnInit(): void {
     let res = this.task_services.getAllTask();
@@ -43,6 +55,7 @@ export class TasksComponent implements OnInit {
     this.dataSource = new MatTableDataSource(res);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.taskData = res;
   }
 
   applyFilter(event: Event) {
@@ -68,6 +81,7 @@ export class TasksComponent implements OnInit {
     this.dataSource = new MatTableDataSource(res);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.taskData = res;
   };
   viewHistory = (task_id: any) => {
     let all_history = this.task_services.getHistoryById(task_id);
@@ -96,4 +110,15 @@ export class TasksComponent implements OnInit {
       this.snake_alert.alert("process reverted", "undo");
     }
   };
+  exportToCSV(): void {
+    const csvData = this.papa.unparse(this.taskData);
+    const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.setAttribute("href", URL.createObjectURL(blob));
+    link.setAttribute("download", "tasks.csv");
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 }

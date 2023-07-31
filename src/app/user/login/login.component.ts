@@ -26,16 +26,18 @@ export class LoginComponent {
   handleLogin = () => {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
-      let res = this.auth_services.loginUser(this.loginForm.value);
-      if (res) {
-        this.snake_alert.alert("login successfull", "redirection to tasks...");
-        this.router.navigate(["tasks"]);
-      } else {
-        this.snake_alert.alert(
-          "invalid credentials or user not found",
-          "pls try again or register!"
-        );
-      }
+      this.auth_services.loginUser(this.loginForm.value).subscribe((res) => {
+        if (res) {
+          this.snake_alert.alert("login successfull", "redirected to tasks");
+          this.router.navigate(["tasks"]);
+        } else {
+          this.snake_alert.alert(
+            "invalid credentials or user not found",
+            "pls try again or register!"
+          );
+        }
+        console.warn(res);
+      });
     } else {
       this.snake_alert.alert("invalid form details", "enter valid details");
     }

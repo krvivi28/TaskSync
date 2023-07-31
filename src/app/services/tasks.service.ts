@@ -20,6 +20,13 @@ export class TasksService {
       "Med",
       "In-Progress"
     ),
+    new Itask(
+      "Angular Interview",
+      "with Parikshit Sir SDE Coding Ninjas",
+      "02-Aug-2023",
+      "Priority",
+      "In-Progress"
+    ),
   ];
   constructor() {}
   getAllTask = () => {
@@ -41,7 +48,7 @@ export class TasksService {
     let tasks = this.allTasks.find((task) => {
       return task.id == _id;
     });
-    return tasks?.edit_history;
+    return tasks?.edit_history?.reverse();
   };
   delTaskById = (id: any) => {
     let ind = this.allTasks.findIndex((task) => {

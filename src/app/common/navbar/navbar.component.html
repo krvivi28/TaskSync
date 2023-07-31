@@ -34,9 +34,26 @@
   <ng-template #elseBlock>
     <button mat-raised-button color="accent">Login</button>
   </ng-template> -->
-  <button mat-button [matMenuTriggerFor]="menu">Profile</button>
+  <button mat-button [matMenuTriggerFor]="menu">
+    {{ isLoggedIn.status ? isLoggedIn.name : "Profile" }}
+  </button>
   <mat-menu #menu="matMenu">
-    <a mat-menu-item routerLink="/login">Login</a>
-    <a mat-menu-item routerLink="/register">Register</a>
+    <a [ngClass]="{ hide: isLoggedIn.status }" mat-menu-item routerLink="/login"
+      >Login</a
+    >
+    <a
+      [ngClass]="{ hide: isLoggedIn.status }"
+      mat-menu-item
+      routerLink="/register"
+      >Register</a
+    >
+    <button
+      [ngClass]="{ hide: !isLoggedIn.status }"
+      (click)="handleLogout()"
+      mat-menu-item
+      color="warn"
+    >
+      Logout
+    </button>
   </mat-menu>
 </mat-toolbar>
