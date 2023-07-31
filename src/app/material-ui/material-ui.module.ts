@@ -19,11 +19,12 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatMenuModule } from "@angular/material/menu";
-
+import { FlexLayoutModule } from "@angular/flex-layout";
 @NgModule({
   declarations: [],
   imports: [CommonModule],
   exports: [
+    FlexLayoutModule,
     MatSortModule,
     MatPaginatorModule,
     MatTableModule,
