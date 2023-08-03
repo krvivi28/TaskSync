@@ -35,20 +35,20 @@
     <button mat-raised-button color="accent">Login</button>
   </ng-template> -->
   <button mat-button [matMenuTriggerFor]="menu">
-    {{ isLoggedIn.status ? isLoggedIn.name : "Profile" }}
+    {{ userStatus.status ? userStatus.userDetails.name : "Profile" }}
   </button>
   <mat-menu #menu="matMenu">
-    <a [ngClass]="{ hide: isLoggedIn.status }" mat-menu-item routerLink="/login"
+    <a [ngClass]="{ hide: userStatus.status }" mat-menu-item routerLink="/login"
       >Login</a
     >
     <a
-      [ngClass]="{ hide: isLoggedIn.status }"
+      [ngClass]="{ hide: userStatus.status }"
       mat-menu-item
       routerLink="/register"
       >Register</a
     >
     <button
-      [ngClass]="{ hide: !isLoggedIn.status }"
+      [ngClass]="{ hide: !userStatus.status }"
       (click)="handleLogout()"
       mat-menu-item
       color="warn"

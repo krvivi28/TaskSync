@@ -1,21 +1,31 @@
 import { Injectable } from "@angular/core";
 import { Iuser } from "../userModel/iuser";
 import { Observable, of } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  isValidUser = false;
+  isValidUser = { status: false, userDetails: {} };
   users: Iuser[] = [
     new Iuser("vivek", "krvivi28@gmail.com", "vivek28@", "male"),
     new Iuser("echo", "echo@gmail.com", "vivek28@", "female"),
   ];
-  constructor() {}
+  constructor(private router: Router) {}
   findIndex = (arr: Iuser[], ind: number) => {
     return arr.findIndex((user) => {
       return user.id == ind;
     });
+  };
+
+  logOut = (): Observable<any> => {
+    this.isValidUser = { status: false, userDetails: {} };
+    this.router.navigate(["login"]);
+    return of(this.isValidUser);
+  };
+  loggedInStatus = (): Observable<any> => {
+    return of(this.isValidUser);
   };
   addUser = (newUser: Iuser) => {
     let { name, email, password, gender } = newUser;
@@ -30,7 +40,8 @@ export class AuthService {
     });
     const jsonUser = JSON.stringify(user);
     if (user) {
-      this.isValidUser = true;
+      this.isValidUser.status = true;
+      this.isValidUser.userDetails = user;
       localStorage.setItem("authUser", jsonUser);
     }
     return of(user);
